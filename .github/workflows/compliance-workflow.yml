@@ -18,3 +18,4 @@ jobs:
 
     - name: Test
       run: cd remote_write &&  go test --tags=compliance -run "TestRemoteWrite/prometheus/.+" -v ./ &&  go test --tags=compliance -run "TestRemoteWrite/otel/.+" -v ./
+      
