@@ -3,15 +3,17 @@ package targets
 import (
 	"fmt"
 	"os"
+	"path"
 )
 
-const otelDownloadURL = "https://github.com/open-telemetry/opentelemetry-collector/releases/download/v0.31.0/otelcol_{{.OS}}_{{.Arch}}"
 
 func RunOtelCollector(opts TargetOptions) error {
-	binary, err := downloadBinary(otelDownloadURL, "")
+	cwd, err := os.Getwd()
 	if err != nil {
 		return err
 	}
+	//hardcoded binary name
+	binary := path.Join(cwd, "bin", "otelcol_linux_amd64")
 
 	cfg := fmt.Sprintf(`
 receivers:
@@ -22,14 +24,11 @@ receivers:
           scrape_interval: 1s
           static_configs:
             - targets: [ '%s' ]
-
 processors:
   batch:
-
 exporters:
   prometheusremotewrite:
     endpoint: '%s'
-
 service:
   pipelines:
     metrics:
