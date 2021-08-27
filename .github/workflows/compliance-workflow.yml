@@ -19,5 +19,5 @@ jobs:
         run:
           cd remote_write && mkdir bin && cd bin && git clone https://github.com/open-telemetry/opentelemetry-collector-contrib.git &&
           cd opentelemetry-collector-contrib && make otelcontribcol-linux_amd64 && cd bin && mv otelcontribcol_linux_amd64 ../../ &&
-          cd ../../ && rm -rf opentelemetry-collector &&
+          cd ../../ && rm -rf opentelemetry-collector-contrib &&
           cd .. && go test --tags=compliance -run "TestRemoteWrite/otel/.+" -v ./
