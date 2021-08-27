@@ -6,14 +6,13 @@ import (
 	"path"
 )
 
-
 func RunOtelCollector(opts TargetOptions) error {
 	cwd, err := os.Getwd()
 	if err != nil {
 		return err
 	}
 	//hardcoded binary name
-	binary := path.Join(cwd, "bin", "otelcol_linux_amd64")
+	binary := path.Join(cwd, "bin", "otelcontribcol_linux_amd64")
 
 	cfg := fmt.Sprintf(`
 receivers:
